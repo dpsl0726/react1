@@ -1,6 +1,8 @@
 package fisa.project.service;
 
 import fisa.project.domain.User;
+import fisa.project.domain.exitUser;
+import fisa.project.repository.ExitUserRepository;
 import fisa.project.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,10 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private ExitUserRepository exitUserRepository;
+
+
     public User create(final User user) {
         if (user == null || user.getUsername() == null) {
             throw new RuntimeException("Invalid arguments");
@@ -24,6 +30,19 @@ public class UserService {
             throw new RuntimeException("중복회원");
         }
         return userRepository.save(user);
+    }
+
+    public exitUser delete(final User user) {
+        exitUser userDelete = exitUser.builder()
+                .userId(user.getUserId())
+                .username(user.getUsername())
+                .birthday(user.getBirthday())
+                .gender(user.getGender())
+                .phone(user.getPhone())
+                .build();
+        userRepository.delete(user);
+        exitUserRepository.save(userDelete);
+        return exitUserRepository.save(userDelete);
     }
 
     // usedId로
@@ -47,7 +66,7 @@ public class UserService {
         }
         originalUser.setUsername(user.getUsername());
         originalUser.setBirthday(user.getBirthday());
-        originalUser.setPhoneNumber(user.getPhoneNumber());
+        originalUser.setPhone(user.getPhone());
         originalUser.setGender(user.getGender());
 
         return userRepository.save(originalUser);

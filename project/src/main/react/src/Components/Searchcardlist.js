@@ -25,7 +25,16 @@ const Searchcardlist = () => {
 
     const searchResultsCount = searchCardResults.length;
 
-    if (searchCardResults.length === 0) return <div>검색된 상품이 없습니다.</div>;
+    if (searchCardResults.length === 0) return (
+        <>
+            <h2 className='searchlist6'>통합 검색 결과</h2>  
+            <hr />
+            <h5 className='searchlist7'>상품 총 {searchResultsCount}건 </h5>
+        <div className="searchlist9">
+            <div>검색된 상품이 없습니다.</div>
+        </div>
+        </>
+    );
 
     return (
         <div className="page-container">
@@ -43,7 +52,7 @@ const Searchcardlist = () => {
                             <p>해외 연회비: {card.overseasFee}</p>
                             <p>전월 실적: {card.minLastMonth}</p>
                             <p>당월 실적: {card.minThisMonth}</p>
-                            <p>혜택: {card.benefitMate}</p>
+                            <p>혜택: {card.benefitCate}</p>
                             <p>주요 혜택: {card.benefitMain}</p>
                         </div>
                         <div className='searchlist8'><Detail card={card}></Detail></div>

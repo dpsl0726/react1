@@ -26,7 +26,7 @@ function Detail({ card }) {  // card 정보를 props로 받습니다.
           <p>해외연회비: {card.overseasFee}</p>
           <p>전월실적: {card.minLastMonth}</p>
           <p>당월실적: {card.minThisMonth}</p>
-          <p>혜택: {card.benefitMate}</p>
+          <p>혜택: {card.benefitCate}</p>
           <p>주요 혜택: {card.benefitMain}</p>
         </div>
         <div className='detail4'>

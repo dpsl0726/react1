@@ -17,17 +17,32 @@ import Elastic from './Components/Elastic';
 import Admin from './pages/Admin';
 import Searchcardlist from './Components/Searchcardlist'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { useState } from 'react';
 function App() {
+    const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('login-token')); // Check initial state with localStorage
+
+    const handleLogin = (token) => {
+      localStorage.setItem('login-token', token);
+      setIsLoggedIn(true);
+    };
+  
+    const handleLogout = () => {
+      localStorage.removeItem('login-token');
+      setIsLoggedIn(false);
+    };
     return (
-              <Router>
-                <Header />
+        <Router>
+        {
+            !['/admin', '/user_info', '/card_info'].includes(window.location.pathname) 
+            && <Header isLoggedIn={isLoggedIn} onLogout={handleLogout} />
+        }
               <Routes>
                   <Route path="/" element={<Home />}/>
-                  <Route path="/login" element={<Login />} />
+                  <Route path="/login" element={<Login onLogin={handleLogin} />} />
                   <Route path="/logout" element={<Logout />} />
                   <Route path="/signup" element={<Signup />} />
                   <Route path="/first" element={<First />} />
-                  <Route path="/mypage" element={<Mypage />} />
+                  <Route path="/mypage" element={<Mypage onLogout={handleLogout} />} />
                   <Route path="/credit" element={<Credit />} />
                   <Route path="/credit/recommend" element={<Recommend />} />
                   <Route path="/wandb" element={<Wandb />} />
@@ -37,7 +52,10 @@ function App() {
                   <Route path="/admin" element={<Admin />} />
                   <Route path="/searchcardlist" element={<Searchcardlist />} />
               </Routes>
-                <Footer />
+              {
+                !['/admin', '/user_info', '/card_info'].includes(window.location.pathname) 
+                && <Footer />
+            }
             </Router>
     );
 }

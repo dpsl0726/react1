@@ -491,7 +491,7 @@ const handleNextClick = () => {
               />
               <Form.Check 
                   type="radio" 
-                  label="300,000원 이하" 
+                  label="30만원 이하" 
                   name="last_monthly_expense" 
                   checked={last_monthly_expense === '2'}
                   value="2"
@@ -499,7 +499,7 @@ const handleNextClick = () => {
               />
               <Form.Check 
                   type="radio" 
-                  label="400,000원 이하" 
+                  label="40만원 이하" 
                   name="last_monthly_expense" 
                   checked={last_monthly_expense === '3'}
                   value="3"
@@ -507,7 +507,7 @@ const handleNextClick = () => {
               />
               <Form.Check 
                   type="radio" 
-                  label="500,000원 이하" 
+                  label="50만원 이하" 
                   name="last_monthly_expense"
                   checked={last_monthly_expense === '4'} 
                   value="4"

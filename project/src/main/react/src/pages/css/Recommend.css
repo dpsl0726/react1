@@ -42,10 +42,29 @@
   .recommended-title {
     color: #000;
     font-feature-settings: 'clig' off, 'liga' off;
-    font-family: 'Inter', sans-serif;
+    font-family: 'NanumSquareNeo-cbd';
     font-size: 33px;
-    font-style: normal;
     font-weight: 700;
     line-height: 100px;
     letter-spacing: -0.24px;
   }
+
+
+.modal-title {
+  font-family: 'NanumSquareNeo-cbd';
+  font-size: 24px; 
+  width: 100%; 
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  gap: 10px; 
+}
+
+.modal-footer button {
+  flex: 1; 
+  width: 100%;
+  font-family: 'NanumSquareNeo-cbd';
+}
