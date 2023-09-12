@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import First from './First';
-
+import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import './css/Recommend.css';
@@ -18,6 +18,23 @@ function Recommend(props) {
 
   const handleCloseModal = () => setShowModal(false);
   const handleShowModal = () => setShowModal(true);
+
+  const [currentRating, setCurrentRating] = useState(0); 
+  const handleRatingChange = (rating) => {
+    setCurrentRating(rating);
+  };
+
+  const handleSubmitRating = async () => {
+    try {
+      // const response = await axios.post('YOUR_SERVER_ENDPOINT', { rating: currentRating });
+      alert("서비스 평점이 정상적으로 제출되었습니다. 더 좋은 서비스로 찾아뵙겠습니다.");
+      handleCloseModal();
+    } catch (error) {
+      console.error("Error submitting rating:", error);
+      alert("현재 네트워크가 불안정합니다. 잠시 후 다시 시도해주세요.");
+    }
+  };
+  
 
 
   const cards = [
@@ -96,11 +113,11 @@ function Recommend(props) {
               <Modal.Title>서비스 평점 매기기</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <Star></Star>
+              <Star onRatingChange={handleRatingChange}></Star>
             </Modal.Body>
             <Modal.Footer>
               <Button variant="secondary" onClick={handleCloseModal}>다음에 평가할래요</Button>
-              <Button variant="primary" onClick={handleCloseModal}>이 점수 줄게요.</Button>
+              <Button variant="primary" onClick={() => handleSubmitRating()}>이 점수 줄게요.</Button>
             </Modal.Footer>
           </Modal>
         </div>

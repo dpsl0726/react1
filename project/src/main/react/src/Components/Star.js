@@ -3,23 +3,11 @@ import axios from 'axios';
 import 'font-awesome/css/font-awesome.min.css';
 import './css/Star.css';
 
-const Star = () => {
+const Star = ({ onRatingChange }) => {
   const [rating, setRating] = useState(0);
-
-  const handleStarClick = (newRating) => {
-    setRating(newRating);
-    sendRatingToServer(newRating);
-  };
-
-  const sendRatingToServer = async (rating) => {
-    try {
-      const response = await axios.post('YOUR_SERVER_ENDPOINT', { rating });
-      if (response.status === 200) {
-        console.log('Rating sent successfully!');
-      }
-    } catch (error) {
-      console.error('Failed to send rating:', error);
-    }
+  const handleStarClick = (i) => {
+    setRating(i);
+    onRatingChange(i)
   };
 
   const renderStars = () => {

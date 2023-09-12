@@ -19,7 +19,7 @@
   padding: 0px;
   font-family: Roboto;
   font-size: 16px;
-  font-style: normal;
+  font-family:"NanumSquareNeo-cbd";
   line-height: 60px;
   margin: 0 auto;
 }
@@ -64,7 +64,7 @@
 .login11{
   color: #000;
   text-align: center;
-  font-family: Roboto;
+  font-family:"NanumSquareNeo-cbd";
   font-size: 16px;
   font-style: normal;
   font-weight: 600;

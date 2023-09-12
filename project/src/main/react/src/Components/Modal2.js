@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import './css/Modal2.css';
+import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 
 function Modal2() {
@@ -96,6 +97,28 @@ const handleNextClick = () => {
     } 
   };
   
+  const dataToSend = {
+    cardOwnYn: card_own_yn,
+    cardPurpose: card_purpose,
+    preperBenefit: prefer_benefit,
+    mostBenefit: most_benefit,
+    airportMileage: airport_mileage,
+    perferDesign: prefer_design,
+    cardYearFee: card_year_fee,
+    lastMonthExpense: last_monthly_expense,
+    thisMonthExpense: this_monthly_expense
+  };
+  // try {
+  //   const response = axios.post('SERVER_ENDPOINT', dataToSend);
+  //   if (response.data.success) {
+  //     console.log("Data sent successfully", response.data);
+  //   } else {
+  //     console.error("Error sending data", response.data.message);
+  //   }
+  // } catch (error) {
+  //   console.error("There was an error sending the data", error);
+  // }
+
 
   const [show, setShow] = useState(false);
   const [loading, setLoading] = useState(false);
