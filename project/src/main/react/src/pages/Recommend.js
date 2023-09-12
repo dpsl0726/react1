@@ -8,8 +8,18 @@ import Modal from 'react-bootstrap/Modal';
 import './css/Recommend.css';
 import Star from '../Components/Star';
 import { useNavigate } from 'react-router-dom';
+import {
+  MDBCard,
+  MDBCardTitle,
+  MDBCardText,
+  MDBCardBody,
+  MDBCardImage,
+  MDBRow,
+  MDBCol
+} from 'mdb-react-ui-kit';
 
 function Recommend(props) {
+  const [showMore, setShowMore] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
   const handleGoHome = () => {
@@ -18,6 +28,8 @@ function Recommend(props) {
 
   const handleCloseModal = () => setShowModal(false);
   const handleShowModal = () => setShowModal(true);
+  const toggleShowMore = () => {setShowMore(!showMore);};
+
 
   const [currentRating, setCurrentRating] = useState(0); 
   const handleRatingChange = (rating) => {
@@ -82,28 +94,44 @@ function Recommend(props) {
     }
 ];
 
-    return (
-      <div className="main-container">
-        <h2 className="recommended-title"> 사회초년인 {localStorage.getItem("login-id")} 님을 위한 추천 신용카드</h2>
-        <div className="header-section">
-          {cards.map((card) => (
-            <Card key={card.card_no} className="card-item">
-              <Card.Img variant="top" src={card.card_image} />
-              <Card.Body>
-                <Card.Title>{card.card_name}</Card.Title>
-                <Card.Text>{card.benefit_main}</Card.Text>
-              </Card.Body>
-              <ListGroup className="list-group-flush">
-                <ListGroup.Item>국내 연회비: {card.domestic_fee}</ListGroup.Item>
-                <ListGroup.Item>해외 연회비: {card.overseas_fee}</ListGroup.Item>
-                <ListGroup.Item>혜택 모아보기:<br />{card.benefit_cate}</ListGroup.Item>
-              </ListGroup>
-              <Card.Body>
-                <Card.Link href={card.card_url}>더 많은 정보 원해요?</Card.Link>
-              </Card.Body>
-            </Card>
-          ))}
-        </div><br/>
+        return (
+          <div className="main-container">
+          <h2 className="recommended-title"> 사회초년인 김피사 님을 위한 추천 신용카드</h2>
+          <div className='header-section'>
+          {cards.slice(0, showMore ? cards.length : 3).map((card) => (
+        <MDBCard style={{ maxWidth: '740px', marginBottom: '20px' }}>
+          <MDBRow className='g-0'>
+            <MDBCol md='3'>
+            <MDBCardImage src={card.card_image} alt={card.card_name} fluid style={{ width: '100%' }} />
+            </MDBCol>
+            <MDBCol md='9'>
+              <MDBCardBody style={{ padding: '20px' }}>
+                <MDBCardTitle>{card.card_name}</MDBCardTitle>
+                <br></br>
+                <MDBCardText>
+                  <strong>메인혜택:</strong> {card.benefit_main}<br />
+                  <strong>주요혜택:</strong> {card.benefit_cate}
+                </MDBCardText>
+                <MDBCardText>
+                  <small className='text-muted'>
+                    <strong>국내 연회비:</strong> {card.domestic_fee}<br />
+                    <strong>해외 연회비:</strong> {card.overseas_fee}
+                </small>
+                {/* <Button variant="primary" className="button2" onClick={handleShowModal} size='10px'>상세 보기</Button> */}
+                </MDBCardText>
+              </MDBCardBody>
+            </MDBCol>
+        </MDBRow>
+        </MDBCard>
+        ))}
+        </div>
+        {cards.length == 3 && (
+              <Button variant="primary" onClick={toggleShowMore}>
+                {showMore ? '간략히 보기' : '더 보기'}
+              </Button>
+            )}
+        <br/>
+
         <div className="footer-section">
           <Button variant="primary" className="button1" onClick={handleGoHome}>추천 다시 받기</Button>
           <Button variant="primary" className="button2" onClick={handleShowModal}>마음에 들어요</Button>
